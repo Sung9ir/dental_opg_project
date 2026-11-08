@@ -69,8 +69,8 @@ The system combines state-of-the-art **YOLOv8 deep learning** with the global **
 Clone this repository and install the dependencies:
 
 ```bash
-git clone https://github.com/your-username/dental-ai-studio.git
-cd dental-ai-studio
+git clone https://github.com/Sung9ir/dental_opg_project.git
+cd dental_opg_project
 pip install -r requirements.txt
 ```
 
