@@ -52,9 +52,11 @@
 
 ## 🚀 نحوه نصب و اجرا
 
-### ۱. پیش‌نیازها
-ابتدا پیش‌نیازهای پروژه را نصب کنید:
+### ۱. کلون مخزن و نصب پیش‌نیازها
+ابتدا ریپازیتوری را دانلود کرده و وارد پوشه آن شوید، سپس پیش‌نیازها را نصب کنید:
 ```bash
+git clone https://github.com/Sung9ir/dental_opg_project.git
+cd dental_opg_project
 pip install -r requirements.txt
 ```
 
