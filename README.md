@@ -9,10 +9,17 @@
 [![YOLOv8](https://img.shields.io/badge/Ultralytics-YOLOv8-orange.svg)](https://github.com/ultralytics/ultralytics)
 [![FDI Standard](https://img.shields.io/badge/Standard-FDI%2011--48-green.svg)](https://www.fdiworlddental.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Status: Early Prototype](https://img.shields.io/badge/Status-Prototype%20v0.1-orange.svg)]()
 
 [🇮🇷 مستندات کامل فارسی (Persian Documentation)](README_FA.md)
 
 </div>
+
+---
+
+> [!IMPORTANT]
+> **⚠️ Prototype & Accuracy Disclaimer (Early Version v0.1):**  
+> This project is currently an **early-stage research prototype / Proof of Concept (PoC)**. The underlying detection model is trained on limited benchmark datasets and is **not yet clinically calibrated or sufficiently accurate for real-world diagnostic use**. Outputs may contain false positives, false negatives, or approximate boundaries. It is designed solely for academic research, software architecture demonstration, and educational exploration—**not for clinical patient diagnosis or treatment planning**.
 
 ---
 
@@ -131,9 +138,10 @@ dental_opg_project/
 
 ---
 
-## ⚠️ Clinical Disclaimer
+## ⚠️ Clinical Disclaimer & Prototype Limitations
 
-This software is an AI-assisted diagnostic aid intended for research, clinical decision support, and educational purposes. It is not intended to replace formal evaluation and diagnosis by a licensed dental professional or radiologist.
+- **Early Version Limitations:** This software is an experimental proof-of-concept prototype (v0.1). Model weights are trained on preliminary open-source data and may produce inaccurate classifications or missed lesions.
+- **Not a Medical Device:** This tool is strictly an engineering and UI/UX proof of concept for dental informatics. It is **not** a certified medical diagnostic device and must never substitute for professional radiographic assessment by a licensed dentist, oral radiologist, or healthcare specialist.
 
 ---
 
