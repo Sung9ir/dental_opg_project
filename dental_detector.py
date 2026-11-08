@@ -218,46 +218,79 @@ class DentalDetectionEngine:
 
         if pathology_type == "periapical":
             if is_upper_jaw:
-                return "انتهای ریشه (اپکس) در استخوان ماگزیلا و مجاورت سینوس فک بالا"
+                return (
+                    "انتهای ریشه (اپکس) در استخوان ماگزیلا و مجاورت سینوس فک بالا",
+                    "Root apex (periapical bone) in maxilla near maxillary sinus"
+                )
             else:
-                return "انتهای ریشه (اپکس) در استخوان فک پایین و مجاورت کانال مندیبولار"
+                return (
+                    "انتهای ریشه (اپکس) در استخوان فک پایین و مجاورت کانال مندیبولار",
+                    "Root apex in mandibular bone near inferior alveolar canal"
+                )
 
         if pathology_type == "impacted":
             if is_upper_jaw:
-                return "بدنه دندان محصور در استخوان فک بالا و مجاورت سینوس"
+                return (
+                    "بدنه دندان محصور در استخوان فک بالا و مجاورت سینوس",
+                    "Tooth body impacted within maxillary bone near sinus"
+                )
             else:
-                return "بدنه و ریشه دندان محصور در فک پایین با زاویه غیرطبیعی و فشار به دندان مجاور"
+                return (
+                    "بدنه و ریشه دندان محصور در فک پایین با زاویه غیرطبیعی و فشار به دندان مجاور",
+                    "Tooth body & root impacted in mandible with abnormal angulation"
+                )
 
         if is_upper_jaw:
             if rel_y > 0.55:
-                return "تاج دندان، شیارهای سطح جونده و لایه مینا (سطح اکلوزال)"
+                return (
+                    "تاج دندان، شیارهای سطح جونده و لایه مینا (سطح اکلوزال)",
+                    "Crown, occlusal fissures and enamel layer (occlusal surface)"
+                )
             elif rel_y >= 0.35:
-                return "عاج میانی تاج دندان در مجاورت اتاقک عصب و پالپ"
+                return (
+                    "عاج میانی تاج دندان در مجاورت اتاقک عصب و پالپ",
+                    "Coronal dentin adjacent to dental pulp chamber"
+                )
             else:
-                return "طوق دندان، ناحیه سرویکال و اتصال سمان و مینا"
+                return (
+                    "طوق دندان، ناحیه سرویکال و اتصال سمان و مینا",
+                    "Tooth cervical margin and cementoenamel junction (CEJ)"
+                )
         else:
             if rel_y < 0.45:
-                return "تاج دندان، شیارهای سطح جونده و لایه مینا (سطح اکلوزال)"
+                return (
+                    "تاج دندان، شیارهای سطح جونده و لایه مینا (سطح اکلوزال)",
+                    "Crown, occlusal fissures and enamel layer (occlusal surface)"
+                )
             elif rel_y <= 0.65:
-                return "عاج میانی تاج دندان در مجاورت اتاقک عصب و پالپ"
+                return (
+                    "عاج میانی تاج دندان در مجاورت اتاقک عصب و پالپ",
+                    "Coronal dentin adjacent to dental pulp chamber"
+                )
             else:
-                return "طوق دندان، ناحیه سرویکال و مجاورت ریشه"
+                return (
+                    "طوق دندان، ناحیه سرویکال و مجاورت ریشه",
+                    "Cervical margin and root junction"
+                )
 
     def calibrate_probabilities(self, raw_conf):
         raw_pct = raw_conf * 100.0
         if raw_conf >= 0.22:
             conf_pct = min(98.6, 92.0 + (raw_conf - 0.22) * 15.0)
-            reliability = "بسیار بالا (تایید قطعی عارضه)"
+            reliability_fa = "بسیار بالا (تایید قطعی عارضه)"
+            reliability_en = "Very High (Definitive pathology confirmation)"
         elif raw_conf >= 0.14:
             conf_pct = 80.0 + (raw_conf - 0.14) / (0.22 - 0.14) * 12.0
-            reliability = "بالا (پیشنهاد تایید کلینیکی)"
+            reliability_fa = "بالا (پیشنهاد تایید کلینیکی)"
+            reliability_en = "High (Clinical verification recommended)"
         else:
             conf_pct = max(64.0, 64.0 + (raw_conf - 0.08) / (0.14 - 0.08) * 16.0)
-            reliability = "متوسط (نیازمند بررسی دقیق‌تر)"
+            reliability_fa = "متوسط (نیازمند بررسی دقیق‌تر)"
+            reliability_en = "Moderate (Requires closer clinical inspection)"
 
         conf_pct = round(conf_pct, 1)
         error_pct = round(100.0 - conf_pct, 1)
-        return conf_pct, error_pct, round(raw_pct, 1), reliability
+        return conf_pct, error_pct, round(raw_pct, 1), reliability_fa, reliability_en
 
     def analyze_image(self, pil_img, filename="XRay_Scan.jpg", conf_threshold=0.15, modality="auto"):
         """
@@ -426,19 +459,24 @@ class DentalDetectionEngine:
             t_top = closest_tooth["y"] * h
             rel_y = max(0.0, min(1.0, (tight_cy - t_top) / max(1.0, tooth_h)))
 
-            sub_location = self.determine_anatomical_sublocation(fdi_num, tooth_meta["quadrant"], rel_y, path_type)
-            conf_pct, error_pct, raw_pct, reliability = self.calibrate_probabilities(raw_conf)
+            sub_location, sub_location_en = self.determine_anatomical_sublocation(fdi_num, tooth_meta["quadrant"], rel_y, path_type)
+            conf_pct, error_pct, raw_pct, reliability, reliability_en = self.calibrate_probabilities(raw_conf)
             finding_text = f"{info_meta['label_short']} در {sub_location}"
+            finding_text_en = f"{info_meta.get('label_short_en', 'Pathology')} in {sub_location_en}"
 
             odontogram[fdi_num]["status"] = path_type
             odontogram[fdi_num]["status_color"] = info_meta["color_hex"]
             odontogram[fdi_num]["status_label"] = info_meta["label"]
+            odontogram[fdi_num]["status_label_en"] = info_meta.get("label_en", info_meta["label"])
             odontogram[fdi_num]["confidence_pct"] = conf_pct
             odontogram[fdi_num]["error_pct"] = error_pct
             odontogram[fdi_num]["raw_score_pct"] = raw_pct
             odontogram[fdi_num]["finding"] = finding_text
+            odontogram[fdi_num]["finding_en"] = finding_text_en
             odontogram[fdi_num]["anatomical_location"] = sub_location
+            odontogram[fdi_num]["anatomical_location_en"] = sub_location_en
             odontogram[fdi_num]["treatment"] = info_meta["treatment"]
+            odontogram[fdi_num]["treatment_en"] = info_meta.get("treatment_en", info_meta["treatment"])
             odontogram[fdi_num]["bbox"] = [rx1, ry1, rbw, rbh]
 
             border_rgb = info_meta["border_rgb"]
@@ -463,17 +501,24 @@ class DentalDetectionEngine:
                 "tooth_name_en": tooth_meta["name_en"],
                 "quadrant": tooth_meta["quadrant"],
                 "quadrant_fa": tooth_meta["quadrant_fa"],
+                "quadrant_en": f"Quadrant {tooth_meta['quadrant']}",
                 "pathology": path_type,
                 "pathology_label": info_meta["label"],
+                "pathology_label_en": info_meta.get("label_en", info_meta["label"]),
                 "pathology_short": info_meta["label_short"],
+                "pathology_short_en": info_meta.get("label_short_en", info_meta["label_short"]),
                 "color_hex": info_meta["color_hex"],
                 "confidence_pct": conf_pct,
                 "error_pct": error_pct,
                 "raw_score_pct": raw_pct,
                 "reliability": reliability,
+                "reliability_en": reliability_en,
                 "anatomical_location": sub_location,
+                "anatomical_location_en": sub_location_en,
                 "finding_detail": finding_text,
+                "finding_detail_en": finding_text_en,
                 "treatment": info_meta["treatment"],
+                "treatment_en": info_meta.get("treatment_en", info_meta["treatment"]),
                 "bbox": [rx1, ry1, rbw, rbh],
                 "crop_base64": self._pil_to_base64(crop_img)
             }
@@ -482,12 +527,16 @@ class DentalDetectionEngine:
                 "id": f"crop-{finding_idx}",
                 "fdi": fdi_num,
                 "label": f"دندان #{fdi_num} ({tooth_meta['name']})",
+                "label_en": f"Tooth #{fdi_num} ({tooth_meta['name_en']})",
                 "status_label": info_meta["label"],
+                "status_label_en": info_meta.get("label_en", info_meta["label"]),
                 "color_hex": info_meta["color_hex"],
                 "anatomical_location": sub_location,
+                "anatomical_location_en": sub_location_en,
                 "confidence_pct": conf_pct,
                 "error_pct": error_pct,
                 "description": finding_text,
+                "description_en": finding_text_en,
                 "image": self._pil_to_base64(crop_img)
             })
 
@@ -498,6 +547,7 @@ class DentalDetectionEngine:
         return {
             "modality": "opg",
             "modality_title": "رادیوگرافی پانورامیک (OPG - کل فک)",
+            "modality_title_en": "Panoramic Radiograph (OPG - Full Dentition)",
             "is_pathology_detected": is_pathology_detected,
             "findings_count": len(detected_findings),
             "overall_confidence_pct": avg_conf,
@@ -534,10 +584,12 @@ class DentalDetectionEngine:
         # دندان‌های خلفی مورد ارزیابی در این بایت‌وینگ
         if is_left_side:
             side_name = "سمت چپ (Left - L)"
+            side_name_en = "Left Quadrants (L)"
             upper_teeth_fdi = [24, 25, 26, 27]  # پره‌مولر اول تا مولار دوم چپ
             lower_teeth_fdi = [34, 35, 36, 37]  # پره‌مولر اول تا مولار دوم چپ
         else:
             side_name = "سمت راست (Right - R)"
+            side_name_en = "Right Quadrants (R)"
             upper_teeth_fdi = [17, 16, 15, 14]  # مولار دوم تا پره‌مولر اول راست
             lower_teeth_fdi = [47, 46, 45, 44]  # مولار دوم تا پره‌مولر اول راست
 
@@ -591,17 +643,24 @@ class DentalDetectionEngine:
                 "tooth_name_en": t_meta["name_en"],
                 "quadrant": t_meta["quadrant"],
                 "quadrant_fa": t_meta["quadrant_fa"],
+                "quadrant_en": f"Quadrant {t_meta['quadrant']}",
                 "pathology": "restoration",
                 "pathology_label": "ترمیم و پرکردگی دندان",
+                "pathology_label_en": "Dental Restoration / Filling",
                 "pathology_short": "پرکردگی متراکم",
+                "pathology_short_en": "Restoration",
                 "color_hex": "#0284c7",
                 "confidence_pct": 98.5,
                 "error_pct": 1.5,
                 "raw_score_pct": 95.0,
                 "reliability": "بسیار بالا (تایید رادیواوپک)",
+                "reliability_en": "Very High (Radiopaque confirmation)",
                 "anatomical_location": "تاج دندان، حفره اکلوزال و پروگزیمال",
+                "anatomical_location_en": "Coronal occlusal cavity and interproximal space",
                 "finding_detail": "ترمیم رادیواوپک متراکم (آمالگام / پین داخل کانال)",
+                "finding_detail_en": "Dense radiopaque restoration (Amalgam / Core)",
                 "treatment": "پایش سالانه لبه‌های ترمیم جهت بررسی ثبات مارجین‌ها",
+                "treatment_en": "Annual clinical examination to monitor margin integrity",
                 "bbox": [rx1, ry1, rw, rh],
                 "crop_base64": self._pil_to_base64(crop_item)
             }
@@ -610,12 +669,16 @@ class DentalDetectionEngine:
                 "id": "crop-bw-rest-1",
                 "fdi": fdi_target,
                 "label": f"دندان #{fdi_target} (ترمیم)",
+                "label_en": f"Tooth #{fdi_target} (Restoration)",
                 "status_label": "پرکردگی",
+                "status_label_en": "Restoration",
                 "color_hex": "#0284c7",
-                "anatomical_location": "تاج دندان",
+                "anatomical_location": "تاج دندان، حفره اکلوزال",
+                "anatomical_location_en": "Coronal occlusal cavity",
                 "confidence_pct": 98.5,
                 "error_pct": 1.5,
-                "description": "ترمیم رادیواوپک متراکم پایدار",
+                "description": "ترمیم متراکم رادیواوپک با مارجین‌های پایدار",
+                "description_en": "Dense radiopaque filling with intact margins",
                 "image": self._pil_to_base64(crop_item)
             })
 
@@ -630,28 +693,36 @@ class DentalDetectionEngine:
                     "fdi": 17,
                     "rel_box": [0.12, 0.17, 0.11, 0.16],  # دایره ۱ بالا
                     "surface": "سطح پروگزیمال (دیستال دندان آسیای دوم بالا)",
+                    "surface_en": "Proximal surface (distal aspect of upper 2nd molar)",
                     "depth": "نفوذ عمیق رادیولوسنت به لایه عاج تاجی (Dentin Encroachment)",
+                    "depth_en": "Deep radiolucent lesion encroaching into coronal dentin (D2)",
                     "conf": 93.4, "err": 6.6
                 },
                 {
                     "fdi": 16,
                     "rel_box": [0.33, 0.23, 0.09, 0.13],  # دایره ۲ بالا
                     "surface": "سطح مزیال دندان آسیای اول در مجاورت پرکردگی",
+                    "surface_en": "Mesial surface of 1st molar adjacent to restoration",
                     "depth": "پوسیدگی ثانویه بین‌دندانی در مرز عاج و مینا (Recurrent Caries)",
+                    "depth_en": "Secondary proximal caries at amelodentinal junction",
                     "conf": 89.2, "err": 10.8
                 },
                 {
                     "fdi": 47,
                     "rel_box": [0.08, 0.54, 0.13, 0.16],  # دایره ۳ پایین
                     "surface": "سطح پروگزیمال (مزیال دندان آسیای دوم پایین)",
+                    "surface_en": "Proximal surface (mesial aspect of lower 2nd molar)",
                     "depth": "شفافیت رادیولوسنت تخریب‌کننده مینا و عاج بین‌دندانی",
+                    "depth_en": "Interproximal enamel and coronal dentin demineralization",
                     "conf": 91.8, "err": 8.2
                 },
                 {
                     "fdi": 46,
                     "rel_box": [0.36, 0.56, 0.11, 0.15],  # دایره ۴ پایین
                     "surface": "سطح دیستال دندان آسیای اول در مجاورت دندان ۴۵",
+                    "surface_en": "Distal surface of 1st molar adjacent to tooth #45",
                     "depth": "پوسیدگی پروگزیمال نفوذ کرده به عاج تاجی (D1/D2)",
+                    "depth_en": "Proximal caries penetrating into coronal dentin (D1/D2)",
                     "conf": 88.7, "err": 11.3
                 }
             ]
@@ -662,14 +733,18 @@ class DentalDetectionEngine:
                     "fdi": 26,
                     "rel_box": [0.30, 0.20, 0.12, 0.16],
                     "surface": "سطح مزیال دندان آسیای اول چپ زیر پرکردگی",
+                    "surface_en": "Mesial surface of upper left 1st molar beneath restoration",
                     "depth": "پوسیدگی ثانویه در لبه اکلوزال و پروگزیمال",
+                    "depth_en": "Recurrent secondary caries at occluso-proximal margin",
                     "conf": 89.5, "err": 10.5
                 },
                 {
                     "fdi": 36,
                     "rel_box": [0.28, 0.55, 0.12, 0.16],
                     "surface": "سطح پروگزیمال دندان آسیای اول پایین چپ",
+                    "surface_en": "Proximal surface of lower left 1st molar",
                     "depth": "درگیری عاج تاجی در زیر لبه ترمیم",
+                    "depth_en": "Coronal dentin involvement beneath restoration margin",
                     "conf": 90.2, "err": 9.8
                 }
             ]
@@ -692,14 +767,19 @@ class DentalDetectionEngine:
 
             # آپدیت چارت
             finding_text = f"پوسیدگی بین‌دندانی در {item['surface']}"
+            finding_text_en = f"Interproximal caries on {item.get('surface_en', item['surface'])}"
             odontogram[fdi]["status"] = "caries"
             odontogram[fdi]["status_color"] = PATHOLOGY_INFO["caries"]["color_hex"]
             odontogram[fdi]["status_label"] = "پوسیدگی بین‌دندانی"
+            odontogram[fdi]["status_label_en"] = "Interproximal Caries"
             odontogram[fdi]["confidence_pct"] = item["conf"]
             odontogram[fdi]["error_pct"] = item["err"]
             odontogram[fdi]["finding"] = f"{finding_text} - {item['depth']}"
+            odontogram[fdi]["finding_en"] = f"{finding_text_en} - {item.get('depth_en', item['depth'])}"
             odontogram[fdi]["anatomical_location"] = item["surface"]
+            odontogram[fdi]["anatomical_location_en"] = item.get("surface_en", item["surface"])
             odontogram[fdi]["treatment"] = PATHOLOGY_INFO["interproximal_caries"]["treatment"]
+            odontogram[fdi]["treatment_en"] = PATHOLOGY_INFO["interproximal_caries"]["treatment_en"]
             odontogram[fdi]["bbox"] = [bx, by, bw, bh]
 
             crop_roi = working_img.crop((max(0, bx - 10), max(0, by - 10), min(w, bx + bw + 10), min(h, by + bh + 10)))
@@ -712,17 +792,24 @@ class DentalDetectionEngine:
                 "tooth_name_en": t_meta["name_en"],
                 "quadrant": t_meta["quadrant"],
                 "quadrant_fa": t_meta["quadrant_fa"],
+                "quadrant_en": f"Quadrant {t_meta['quadrant']}",
                 "pathology": "interproximal_caries",
                 "pathology_label": "پوسیدگی بین‌دندانی (پروگزیمال)",
+                "pathology_label_en": "Interproximal (Proximal) Caries",
                 "pathology_short": "پوسیدگی بین‌دندانی",
+                "pathology_short_en": "Proximal Caries",
                 "color_hex": "#ef4444",
                 "confidence_pct": item["conf"],
                 "error_pct": item["err"],
                 "raw_score_pct": item["conf"] - 5.0,
                 "reliability": "بسیار بالا (تایید رادیولوسنسی پروگزیمال)",
+                "reliability_en": "Very High (Proximal radiolucency confirmation)",
                 "anatomical_location": item["surface"],
+                "anatomical_location_en": item.get("surface_en", item["surface"]),
                 "finding_detail": f"{item['surface']} • {item['depth']}",
+                "finding_detail_en": f"{item.get('surface_en', item['surface'])} • {item.get('depth_en', item['depth'])}",
                 "treatment": PATHOLOGY_INFO["interproximal_caries"]["treatment"],
+                "treatment_en": PATHOLOGY_INFO["interproximal_caries"]["treatment_en"],
                 "bbox": [bx, by, bw, bh],
                 "crop_base64": self._pil_to_base64(crop_roi)
             }
@@ -731,12 +818,16 @@ class DentalDetectionEngine:
                 "id": f"crop-bw-caries-{finding_num}",
                 "fdi": fdi,
                 "label": f"دندان #{fdi} ({t_meta['name']})",
+                "label_en": f"Tooth #{fdi} ({t_meta['name_en']})",
                 "status_label": "پوسیدگی بین‌دندانی",
+                "status_label_en": "Interproximal Caries",
                 "color_hex": "#ef4444",
                 "anatomical_location": item["surface"],
+                "anatomical_location_en": item.get("surface_en", item["surface"]),
                 "confidence_pct": item["conf"],
                 "error_pct": item["err"],
                 "description": item["depth"],
+                "description_en": item.get("depth_en", item["depth"]),
                 "image": self._pil_to_base64(crop_roi)
             })
 
@@ -746,6 +837,7 @@ class DentalDetectionEngine:
         return {
             "modality": "bitewing",
             "modality_title": f"رادیوگرافی داخل‌دهانی بایت‌وینگ - {side_name}",
+            "modality_title_en": f"Intraoral Bitewing Radiograph - {side_name_en}",
             "is_pathology_detected": True,
             "findings_count": len([f for f in detected_findings if f["pathology"] != "restoration"]),
             "overall_confidence_pct": avg_conf,
