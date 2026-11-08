@@ -1,0 +1,485 @@
+[
+  {
+    "ref": "thunderpede/panoramic-dental-dataset",
+    "title": "Panoramic Dental Dataset",
+    "subtitle": "Dental Panoramic Caries Segmentation Dataset",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/thunderpede/panoramic-dental-dataset"
+  },
+  {
+    "ref": "lokisilvres/dental-disease-panoramic-detection-dataset",
+    "title": "Dental X-Ray Panoramic Dataset",
+    "subtitle": "Dental X-Ray Panoramic Dataset",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/lokisilvres/dental-disease-panoramic-detection-dataset"
+  },
+  {
+    "ref": "daverattan/dental-xrary-tfrecords",
+    "title": "Panoramic Dental Xray Dataset",
+    "subtitle": "Dental X-rays of the whole mouth.",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/daverattan/dental-xrary-tfrecords"
+  },
+  {
+    "ref": "truthisneverlinear/childrens-dental-panoramic-radiographs-dataset",
+    "title": "Children's Dental Panoramic Radiographs Dataset",
+    "subtitle": "caries segmentation and dental disease detection",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/truthisneverlinear/childrens-dental-panoramic-radiographs-dataset"
+  },
+  {
+    "ref": "dnkumars/panoramic-dental-radiographs-opg-across-ages",
+    "title": "Panoramic Dental Radiographs (OPG) Across Ages",
+    "subtitle": "Panoramic Dental OPG collection for age and sex estimation research",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/dnkumars/panoramic-dental-radiographs-opg-across-ages"
+  },
+  {
+    "ref": "yudhaislamisulistya/dataset-dental-panoramic",
+    "title": "Dataset Dental Panoramic",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/yudhaislamisulistya/dataset-dental-panoramic"
+  },
+  {
+    "ref": "truthisneverlinear/dentex-challenge-2023",
+    "title": "DENTEX CHALLENGE 2023",
+    "subtitle": "Dental Enumeration and Diagnosis on Panoramic X-rays",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/truthisneverlinear/dentex-challenge-2023"
+  },
+  {
+    "ref": "humansintheloop/teeth-segmentation-on-dental-x-ray-images",
+    "title": "Teeth Segmentation on dental X-ray images",
+    "subtitle": "The dataset consists of 598 images with a total of 15,318 polygons",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/humansintheloop/teeth-segmentation-on-dental-x-ray-images"
+  },
+  {
+    "ref": "volodymyrpivoshenko/panoramic-dental-x-rays-with-segmented-mandibles",
+    "title": "Panoramic Dental X-rays With Segmented Mandibles",
+    "subtitle": "Panoramic Dental X-rays With Segmented Mandibles 🦷☢️",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/volodymyrpivoshenko/panoramic-dental-x-rays-with-segmented-mandibles"
+  },
+  {
+    "ref": "orvile/panoramic-dental-xray-dataset",
+    "title": "Panoramic Dental Xray Dataset",
+    "subtitle": "tooth instance segmentation dataset",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/orvile/panoramic-dental-xray-dataset"
+  },
+  {
+    "ref": "amitabhabu/panoramic-dental-x-ray-images",
+    "title": "Panoramic Dental X-Ray Images",
+    "subtitle": "Semantic Segmentation",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/amitabhabu/panoramic-dental-x-ray-images"
+  },
+  {
+    "ref": "shanecandoit/dental-xrays",
+    "title": "Dental-Panoramic-Xrays",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/shanecandoit/dental-xrays"
+  },
+  {
+    "ref": "orvile/panoramic-dental-radiography-dataset",
+    "title": "Panoramic Dental Radiography Dataset",
+    "subtitle": "Panoramic radiography database",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/orvile/panoramic-dental-radiography-dataset"
+  },
+  {
+    "ref": "wanmugui/childrens-dental-panoramic-x-ray-dataset",
+    "title": "CHILDREN’S DENTAL PANORAMIC X-RAY DATASET",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/wanmugui/childrens-dental-panoramic-x-ray-dataset"
+  },
+  {
+    "ref": "kasmira/dentalpanoramic",
+    "title": "dental-panoramic",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/kasmira/dentalpanoramic"
+  },
+  {
+    "ref": "hasnitadita/image-dental-panoramic",
+    "title": "Image Dental Panoramic",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/hasnitadita/image-dental-panoramic"
+  },
+  {
+    "ref": "ishantrajkashyap/dental-disease-detection",
+    "title": "Dental-Disease-Detection",
+    "subtitle": "Annotated dental X-ray images for disease detection using deep learning",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/ishantrajkashyap/dental-disease-detection"
+  },
+  {
+    "ref": "wenchik/gender-labelled-panoramic-dental-xray",
+    "title": "Gender Labelled Panoramic Dental X‑ray",
+    "subtitle": "Male and Female High Quality PDR images",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/wenchik/gender-labelled-panoramic-dental-xray"
+  },
+  {
+    "ref": "osamakramadan/rakin-roboflow-panoramic-dental-images",
+    "title": "Rakin Roboflow Panoramic - Dental Images",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/osamakramadan/rakin-roboflow-panoramic-dental-images"
+  },
+  {
+    "ref": "tommyngx/childrens-dental-panoramic-radiographs",
+    "title": "Childrens Dental Panoramic Radiographs",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/tommyngx/childrens-dental-panoramic-radiographs"
+  },
+  {
+    "ref": "imtkaggleteam/dental-radiography",
+    "title": "Dental Radiography",
+    "subtitle": "Dental Radiography Analysis and Diagnosis Dataset",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/imtkaggleteam/dental-radiography"
+  },
+  {
+    "ref": "kvipularya/a-collection-of-dental-x-ray-images-for-analysis",
+    "title": "A Collection of Dental X-ray Images for Analysis",
+    "subtitle": "\"Unlocking Insights: A Comprehensive Dental X-ray Dataset for Machine Learning\"",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/kvipularya/a-collection-of-dental-x-ray-images-for-analysis"
+  },
+  {
+    "ref": "henriquerezermosqur/dental-x-ray-computacional-vision-segmentation",
+    "title": "Dental X Ray Computacional Vision Segmentation",
+    "subtitle": "Dental X Ray Computacional Vision Segmentation",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/henriquerezermosqur/dental-x-ray-computacional-vision-segmentation"
+  },
+  {
+    "ref": "killa92/dental-x-ray-images-dataset",
+    "title": "Dental X-Ray Images Dataset",
+    "subtitle": "Semantic Segmentation and Object Detection Dataset",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/killa92/dental-x-ray-images-dataset"
+  },
+  {
+    "ref": "ermecan/dental-x-ray-dataset",
+    "title": "Dental X-Ray Dataset",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/ermecan/dental-x-ray-dataset"
+  },
+  {
+    "ref": "orvile/dental-opg-xray-dataset",
+    "title": "Dental OPG XRAY Dataset (Version 4)",
+    "subtitle": "Smartphone-Captured Dental Insights Version 4",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/orvile/dental-opg-xray-dataset"
+  },
+  {
+    "ref": "abdulrahmanburham/x-ray-dental-cavity-dataset",
+    "title": "x-ray-Dental Cavity Dataset",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/abdulrahmanburham/x-ray-dental-cavity-dataset"
+  },
+  {
+    "ref": "hagargalall/x-ray-dental-data",
+    "title": "x-ray Dental Data",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/hagargalall/x-ray-dental-data"
+  },
+  {
+    "ref": "shuvokumarbasak2030/medical-imaging-ct-xray-colorization-new-dataset",
+    "title": "Medical Imaging (CT-Xray) Colorization New Dataset",
+    "subtitle": "Breast, lung Cancer, Chest, Brain CT-Scan, Dental OPG Xray , DRR - Bones",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/shuvokumarbasak2030/medical-imaging-ct-xray-colorization-new-dataset"
+  },
+  {
+    "ref": "orvile/dental-opg-kennedy-dataset",
+    "title": "Dental OPG Kennedy Dataset",
+    "subtitle": "OPG Dataset for Kennedy Classification of Partially Edentulous Arches",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/orvile/dental-opg-kennedy-dataset"
+  },
+  {
+    "ref": "nirmalgaud/dental-opg-x-ray-dataset-updated",
+    "title": "Dental OPG X-Ray Dataset Updated",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/nirmalgaud/dental-opg-x-ray-dataset-updated"
+  },
+  {
+    "ref": "imtkaggleteam/dental-opg-xray-dataset",
+    "title": "Dental OPG Xray Dataset",
+    "subtitle": "Dental OPG XRAY Dataset | Classification and Object Detection",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/imtkaggleteam/dental-opg-xray-dataset"
+  },
+  {
+    "ref": "abbasseifossadat/dental-radiography-segmentation",
+    "title": "Dental Radiography Segmentation",
+    "subtitle": "High-Quality Segmented Dental Radiographs Focused on Individual Tooth Conditions",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/abbasseifossadat/dental-radiography-segmentation"
+  },
+  {
+    "ref": "kapitanov/easyportrait",
+    "title": "EasyPortrait: Face Parsing & Portrait Segmentation",
+    "subtitle": "EasyPortrait - Face Parsing & Portrait Segmentation Dataset",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/kapitanov/easyportrait"
+  },
+  {
+    "ref": "leonardoaranguiz/segmentation-teeth-images-and-masks",
+    "title": "Segmentation teeth Images and Masks",
+    "subtitle": "Odontify – Dental Photo 5 view, Segmentation Dataset (572×572)",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/leonardoaranguiz/segmentation-teeth-images-and-masks"
+  },
+  {
+    "ref": "mahdierahmati/segmented-dental-radiography",
+    "title": "Segmented Dental Radiography",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/mahdierahmati/segmented-dental-radiography"
+  },
+  {
+    "ref": "mariamosamakhalifa/adult-caries-detection-dataset",
+    "title": "Adult Caries Detection Dataset",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/mariamosamakhalifa/adult-caries-detection-dataset"
+  },
+  {
+    "ref": "zwbzwb12341234/a-dual-labeled-dataset",
+    "title": "A dual-labeled dataset",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/zwbzwb12341234/a-dual-labeled-dataset"
+  },
+  {
+    "ref": "swaptr/pacolvis-dataset",
+    "title": "PACO-LVIS Dataset",
+    "subtitle": "Large scale dataset providing object/part level masks and attributes",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/swaptr/pacolvis-dataset"
+  },
+  {
+    "ref": "tommyngx/dc1000-2023",
+    "title": "DC1000 2023",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/tommyngx/dc1000-2023"
+  },
+  {
+    "ref": "detectioncla/cbct-teeth-segmentation",
+    "title": "CBCT_teeth_segmentation",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/detectioncla/cbct-teeth-segmentation"
+  },
+  {
+    "ref": "salmansajid05/oral-diseases",
+    "title": "Oral Diseases ",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/salmansajid05/oral-diseases"
+  },
+  {
+    "ref": "kukuroo3/body-signal-of-smoking",
+    "title": "Body signal of smoking",
+    "subtitle": "find smokers by vital signs (binary classification)",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/kukuroo3/body-signal-of-smoking"
+  },
+  {
+    "ref": "leonardoaranguiz/toothh",
+    "title": "TOOTH try inference",
+    "subtitle": "To use as samples on testing ICDAS models",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/leonardoaranguiz/toothh"
+  },
+  {
+    "ref": "prajwalbastewad/dental-caries-dataset",
+    "title": "Dental Caries Dataset",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/prajwalbastewad/dental-caries-dataset"
+  },
+  {
+    "ref": "singh868/multi-class-oral-disease-detection-dataset",
+    "title": "Multi-Class Oral Disease Detection Dataset",
+    "subtitle": "Labeled Oral Disease Images for Computer Vision and Deep Learning",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/singh868/multi-class-oral-disease-detection-dataset"
+  },
+  {
+    "ref": "jhirshaikh/oral-image-dataset",
+    "title": "Oral_Image_Dataset",
+    "subtitle": "Multi-class image dataset for oral diseases, dental anomalies, and classificatio",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/jhirshaikh/oral-image-dataset"
+  },
+  {
+    "ref": "shahjahanabdullatif/datasetcavitydetection",
+    "title": "Dental Cavities Synthesized Multi-Source Dataset",
+    "subtitle": "Dental Caries Detection",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/shahjahanabdullatif/datasetcavitydetection"
+  },
+  {
+    "ref": "walidphd/dental-caries-classificationv3",
+    "title": "dental caries classificationv3",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/walidphd/dental-caries-classificationv3"
+  },
+  {
+    "ref": "sizlingdhairya1/oral-infection",
+    "title": "Oral Infection",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/sizlingdhairya1/oral-infection"
+  },
+  {
+    "ref": "mohamedyassergoat/dental-caries",
+    "title": "Dental caries",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/mohamedyassergoat/dental-caries"
+  },
+  {
+    "ref": "mariamosamakhalifa/pediatric-dental-caries-detection-dataset",
+    "title": "Pediatric dental caries detection dataset",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/mariamosamakhalifa/pediatric-dental-caries-detection-dataset"
+  },
+  {
+    "ref": "leonardoaranguiz/benchmark-icdas-odontify-outputs",
+    "title": "Benchmark ICDAS Odontify Outputs",
+    "subtitle": "Benchmark results for 5 CNN architectures on dental caries (ICDAS) classificatio",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/leonardoaranguiz/benchmark-icdas-odontify-outputs"
+  },
+  {
+    "ref": "mariamosamakhalifa/children-caries-detection-dataset",
+    "title": "Children Caries Detection Dataset",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/mariamosamakhalifa/children-caries-detection-dataset"
+  },
+  {
+    "ref": "ikyd26/m-tm-dataset",
+    "title": "Mandibular Third Molar (m-TM) Dataset",
+    "subtitle": "m-TM Dataset: Expert-Labeled Panoramic Radiographs for AI-Driven Dentistry",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/ikyd26/m-tm-dataset"
+  },
+  {
+    "ref": "suhrathtahra/dental-dataset",
+    "title": "Dental Dataset",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/suhrathtahra/dental-dataset"
+  },
+  {
+    "ref": "ikyd26/expert-annotated-mandibular-third-molar-dataset",
+    "title": "Expert Annotated Mandibular Third Molar Dataset",
+    "subtitle": "Expert annotated panoramic X-rays for erupted and impacted third molar detection",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/ikyd26/expert-annotated-mandibular-third-molar-dataset"
+  },
+  {
+    "ref": "ohyp96/automated-dmft-assessment",
+    "title": "Automated DMFT Assessment",
+    "subtitle": "Expert-Annotated Panoramic Radiographs for Automated DMFT Assessment",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/ohyp96/automated-dmft-assessment"
+  },
+  {
+    "ref": "obaidulhaque/dental-dataset",
+    "title": "Dental Dataset",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/obaidulhaque/dental-dataset"
+  },
+  {
+    "ref": "arfintanim/dental-opg-xray",
+    "title": "Dental OPG XRAY",
+    "subtitle": "Learnify Research Lab",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/arfintanim/dental-opg-xray"
+  },
+  {
+    "ref": "mahinahnaf/dental-opg",
+    "title": "Dental opg",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/mahinahnaf/dental-opg"
+  },
+  {
+    "ref": "tommyngx/dental-opg-xray-2024",
+    "title": "Dental OPG Xray 2024",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/tommyngx/dental-opg-xray-2024"
+  },
+  {
+    "ref": "chaudharyv209/opgdata",
+    "title": "opgdata",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/chaudharyv209/opgdata"
+  },
+  {
+    "ref": "djmrcoolanjana/augmentation",
+    "title": "Augmentation",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/djmrcoolanjana/augmentation"
+  },
+  {
+    "ref": "redwan155/dental-dataset",
+    "title": "Dental Dataset",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/redwan155/dental-dataset"
+  },
+  {
+    "ref": "islaye/dental-org-raw-dataset",
+    "title": "Dental ORG Raw Dataset",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/islaye/dental-org-raw-dataset"
+  },
+  {
+    "ref": "ahmedyassen1996/dental",
+    "title": "Dental",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/ahmedyassen1996/dental"
+  },
+  {
+    "ref": "djmrcoolanjana/dental-classification",
+    "title": "Dental Classification",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/djmrcoolanjana/dental-classification"
+  },
+  {
+    "ref": "namrathagopinath/teeth-dataset-labels-2",
+    "title": "Teeth Dataset (Labels) 2",
+    "subtitle": "",
+    "size": "N/A",
+    "url": "https://www.kaggle.com/datasets/namrathagopinath/teeth-dataset-labels-2"
+  }
+]

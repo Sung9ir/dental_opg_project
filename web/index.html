@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سامانه بالینی رادیولوژی دندان (DentalAI OPG Studio)</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- نوار ناوبری بالا -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">🦷</span>
+                <div class="logo-text">
+                    <h1>سامانه هوشمند رادیولوژی فک و دندان</h1>
+                    <p>تشخیص عوارض OPG • کادرکشی دقیق تک‌دندان • چارتینگ ۳۲ دندان FDI • محاسبه درستی و خطا</p>
+                </div>
+            </div>
+            <div class="nav-badges">
+                <div class="nav-badge">
+                    <span class="badge-dot"></span>
+                    <span>مدل فعال: YOLOv8-Dental</span>
+                </div>
+                <div class="nav-badge">
+                    <span>استاندارد جهانی FDI 11-48</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <!-- راهنمای مراحل سریع کار با سیستم -->
+        <div class="workflow-steps">
+            <div class="step-item active">
+                <span class="step-num">۱</span>
+                <span class="step-text">بارگذاری رادیوگرافی (یا انتخاب نمونه)</span>
+            </div>
+            <div class="step-arrow">←</div>
+            <div class="step-item">
+                <span class="step-num">۲</span>
+                <span class="step-text">تنظیم حساسیت هوش مصنوعی (پیشنهادی: ۱۵٪)</span>
+            </div>
+            <div class="step-arrow">←</div>
+            <div class="step-item">
+                <span class="step-num">۳</span>
+                <span class="step-text">مشاهده کادرکشی، چارت دندان‌ها و گزارش</span>
+            </div>
+        </div>
+
+        <!-- پنل آپلود و تنظیمات کاربری -->
+        <section class="upload-section">
+            <div class="card upload-card">
+                <div class="card-title-group">
+                    <h2>بارگذاری تصویر رادیوگرافی دندان (OPG یا Bitewing)</h2>
+                    <p class="subtitle">
+                        تصویر رادیوگرافی پانورامیک (کل فک) یا بایت‌وینگ (پوسیدگی بین‌دندانی دندان‌های عقب) را بارگذاری کنید تا هوش مصنوعی به طور خودکار نوع رادیوگرافی را تشخیص داده و دندان‌ها را تحلیل کند.
+                    </p>
+                </div>
+
+                <!-- انتخابگر نوع رادیوگرافی (Modality Selector) -->
+                <div class="modality-selector-box">
+                    <span class="modality-title">نوع رادیوگرافی:</span>
+                    <div class="modality-pills">
+                        <button type="button" class="btn-modality active" id="modAutoBtn" data-mod="auto">
+                            ⚡ تشخیص خودکار هوشمند (Auto)
+                        </button>
+                        <button type="button" class="btn-modality" id="modOpgBtn" data-mod="opg">
+                            🦷 رادیوگرافی پانورامیک (OPG)
+                        </button>
+                        <button type="button" class="btn-modality" id="modBwBtn" data-mod="bitewing">
+                            🔍 بایت‌وینگ / پری‌آپیکال (Bitewing)
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- دراپ‌زون بارگذاری فایل -->
+                <div class="drop-zone" id="dropZone">
+                    <input type="file" id="fileInput" accept="image/*,.pdf" hidden>
+                    <div class="drop-content">
+                        <div class="upload-icon">📤</div>
+                        <p class="drop-text">تصویر رادیوگرافی یا PDF را اینجا بکشید و رها کنید (Drag & Drop)</p>
+                        <span class="or-divider">یا</span>
+                        <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                            📁 انتخاب فایل رادیوگرافی از سیستم
+                        </button>
+                        <p class="file-hint">فرمت‌های قابل پذیرش: JPG, PNG, WEBP, BMP, PDF</p>
+                    </div>
+                </div>
+
+                <!-- دکمه‌های تست سریع با نمونه‌های بالینی -->
+                <div class="sample-section">
+                    <div class="sample-header">
+                        <span class="sample-label">⚡ یا برای آزمایش سریع، یکی از نمونه‌های آماده زیر را انتخاب کنید:</span>
+                    </div>
+                    <div class="sample-buttons">
+                        <button class="btn btn-sample" id="sampleBitewing1Btn">
+                            <span class="btn-icon">🔍</span>
+                            <div class="sample-btn-text">
+                                <strong>نمونه ۱ (بایت‌وینگ BW واقعی):</strong>
+                                <small>پوسیدگی‌های بین‌دندانی (پروگزیمال) و پرکردگی</small>
+                            </div>
+                        </button>
+                        <button class="btn btn-sample" id="sampleBitewing2Btn">
+                            <span class="btn-icon">🦷</span>
+                            <div class="sample-btn-text">
+                                <strong>نمونه ۲ (بایت‌وینگ BW چپ):</strong>
+                                <small>ترمیم‌های وسیع فلزی و ارزیابی لبه‌ها</small>
+                            </div>
+                        </button>
+                        <button class="btn btn-sample" id="sampleClinical1Btn">
+                            <span class="btn-icon">🩺</span>
+                            <div class="sample-btn-text">
+                                <strong>نمونه ۳ (OPG پانورامیک):</strong>
+                                <small>پوسیدگی‌های متعدد دندان و ضایعه ریشه</small>
+                            </div>
+                        </button>
+                        <button class="btn btn-sample" id="sampleNormalBtn">
+                            <span class="btn-icon">✨</span>
+                            <div class="sample-btn-text">
+                                <strong>نمونه ۴ (سالم):</strong>
+                                <small>قوس فکی طبیعی و دندان‌های سالم</small>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- پنل هوشمند تنظیم حساسیت مدل با پیشنهاد بهینه -->
+                <div class="sensitivity-panel">
+                    <div class="slider-header">
+                        <div class="slider-title-area">
+                            <span class="slider-icon">⚙️</span>
+                            <div>
+                                <strong>تنظیم آستانه حساسیت هوش مصنوعی (Sensitivity Threshold):</strong>
+                                <div class="optimal-hint">⭐ بهترین و مناسب‌ترین حالت برای کاربری بالینی: <strong>۱۵٪ (Optimal)</strong></div>
+                            </div>
+                        </div>
+                        <span class="slider-value-badge" id="sliderValueBadge">۱۵٪ (پیشنهادی و بهینه)</span>
+                    </div>
+
+                    <!-- دکمه‌های انتخاب سریع حالت‌های از پیش تنظیم‌شده -->
+                    <div class="preset-buttons">
+                        <button type="button" class="btn-preset active" id="presetOptimalBtn" data-val="15">
+                            🌟 حالت بهینه و پیشنهادی (۱۵٪)
+                            <small>بهترین تعادل بین کشف پوسیدگی‌ها و عدم ایجاد خطای کاذب</small>
+                        </button>
+                        <button type="button" class="btn-preset" id="presetHighBtn" data-val="8">
+                            🔍 حساسیت بالا (۸٪)
+                            <small>ردیابی تمام کانون‌های ریز و مشکوک اولیه</small>
+                        </button>
+                        <button type="button" class="btn-preset" id="presetConservativeBtn" data-val="25">
+                            🛡️ حالت سخت‌گیرانه (۲۵٪)
+                            <small>فقط نمایش پاتولوژی‌های قطعی و کاملاً پیشرفته</small>
+                        </button>
+                    </div>
+
+                    <div class="slider-row">
+                        <span class="slider-bound">۵٪ (بسیار حساس)</span>
+                        <input type="range" id="confSlider" min="5" max="35" value="15" step="1" class="slider-input">
+                        <span class="slider-bound">۳۵٪ (سخت‌گیرانه)</span>
+                    </div>
+
+                    <p class="slider-explanation">
+                        💡 <strong>راهنما:</strong> مدل با حساسیت پیشنهادی <strong>۱۵٪</strong> به طور خودکار عوارض را به تفکیک هر دندان ارزیابی می‌کند. با حرکت دادن اسلایدر می‌توانید حساسیت را به دلخواه تغییر دهید.
+                    </p>
+                </div>
+            </div>
+
+            <!-- وضعیت در حال پردازش -->
+            <div class="card status-card" id="statusCard" style="display: none;">
+                <div class="spinner"></div>
+                <div class="status-info">
+                    <h3 id="statusTitle">در حال بررسی رادیوگرافی و پردازش مدل هوش مصنوعی...</h3>
+                    <p id="statusDesc">افزایش وضوح، مکان‌یابی دقیق کانون عارضه دور تک‌دندان و محاسبه احتمالات</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش نتایج هوش مصنوعی -->
+        <section class="results-section" id="resultsSection" style="display: none;">
+            <!-- بنر خلاصه وضعیت بالینی بیمار -->
+            <div class="card diagnosis-card" id="diagnosisCard">
+                <div class="diagnosis-header">
+                    <div class="diag-title-area">
+                        <span class="diag-tag" id="diagTag">ارزیابی کلی وضعیت فک و دندان</span>
+                        <h2 id="diagTitle">در حال ارزیابی یافته‌ها...</h2>
+                        <p class="diag-summary" id="diagSummary"></p>
+                    </div>
+
+                    <!-- آمارهای درستی و خطا -->
+                    <div class="metrics-dashboard">
+                        <div class="metric-card metric-confidence">
+                            <span class="metric-label">میانگین احتمال درستی</span>
+                            <div class="metric-value-row">
+                                <span class="metric-number" id="confidenceValue">0%</span>
+                                <span class="metric-sub">اطمینان تشخیصی</span>
+                            </div>
+                            <div class="metric-progress-bg">
+                                <div class="metric-progress-bar confidence-bar" id="confidenceBar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card metric-error">
+                            <span class="metric-label">میانگین احتمال خطا</span>
+                            <div class="metric-value-row">
+                                <span class="metric-number" id="errorValue">0%</span>
+                                <span class="metric-sub">حاشیه عدم قطعیت</span>
+                            </div>
+                            <div class="metric-progress-bg">
+                                <div class="metric-progress-bar error-bar" id="errorBar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card metric-count">
+                            <span class="metric-label">دندان‌های دارای عارضه</span>
+                            <div class="metric-value-row">
+                                <span class="metric-number" id="findingsCountValue">0</span>
+                                <span class="metric-sub">دندان نیازمند توجه</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- رادیوگرافی با کادرکشی دقیق دور هر دندان -->
+            <div class="card img-card">
+                <div class="card-header">
+                    <div>
+                        <h3>مکان‌یابی کانون عارضه روی رادیوگرافی (OPG Bounding Boxes)</h3>
+                        <p class="card-desc">کادر دور همان دندان آسیب‌دیده با اندازه دقیق کشیده شده و شماره دندان FDI درج شده است.</p>
+                    </div>
+                    <div class="img-tools">
+                        <button class="btn btn-outline" id="toggleViewBtn">🔄 نمایش تصویر خام بدون کادر</button>
+                        <span class="pill pill-alert" id="roiCountPill">0 عارضه مشخص شد</span>
+                    </div>
+                </div>
+                
+                <div class="image-wrapper" id="imageWrapper">
+                    <img id="boxedImage" alt="تصویر OPG کادرکشی شده">
+                </div>
+                
+                <div class="image-caption">
+                    <span class="caption-item"><span class="dot" style="background: #ef4444;"></span> قرمز: پوسیدگی دندان (Caries)</span>
+                    <span class="caption-item"><span class="dot" style="background: #f59e0b;"></span> نارنجی: دندان نهفته در فک (Impacted)</span>
+                    <span class="caption-item"><span class="dot" style="background: #a855f7;"></span> بنفش: ضایعه و کیست ریشه (Periapical)</span>
+                    <span class="caption-item"><span class="dot" style="background: #10b981;"></span> سبز: ساختار طبیعی دندان (Sound)</span>
+                </div>
+            </div>
+
+            <!-- چارت دندانپزشکی تعاملی ۳۲ دندان FDI -->
+            <div class="card odontogram-card">
+                <div class="card-header">
+                    <div>
+                        <h3>🦷 نقشه تعاملی ۳۲ دندان دائمی — استاندارد جهانی FDI</h3>
+                        <p class="card-desc">روی هر دندان کلیک کنید تا نام، شماره FDI و وضعیت کامل آن نمایش داده شود. رنگ هر دندان نشان‌دهنده وضعیت بالینی آن است.</p>
+                    </div>
+                    <div class="legend-area">
+                        <span class="legend-item"><span class="legend-box" style="background: #10b981;"></span> سالم</span>
+                        <span class="legend-item"><span class="legend-box" style="background: #ef4444;"></span> پوسیدگی</span>
+                        <span class="legend-item"><span class="legend-box" style="background: #0284c7;"></span> ترمیم/پرکردگی</span>
+                        <span class="legend-item"><span class="legend-box" style="background: #f59e0b;"></span> دندان نهفته</span>
+                        <span class="legend-item"><span class="legend-box" style="background: #a855f7;"></span> ضایعه ریشه</span>
+                        <span class="legend-item"><span class="legend-box" style="background: #94a3b8;"></span> خارج از تصویر</span>
+                    </div>
+                </div>
+
+                <!-- نمودار SVG گرافیکی دندان‌ها -->
+                <div class="svg-odontogram-container">
+                    <svg id="toothSVGChart" viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+                        <!-- به صورت خودکار توسط JS پر می‌شود -->
+                    </svg>
+                </div>
+
+                <div class="odontogram-wrapper" style="display:none;">
+                    <!-- فک بالا -->
+                    <div class="jaw-row">
+                        <span class="jaw-title">فک بالا (ماگزیلا): دندان‌های ۱۸ تا ۱۱ (سمت راست) و ۲۱ تا ۲۸ (سمت چپ)</span>
+                        <div class="teeth-row" id="upperJawTeeth"></div>
+                    </div>
+
+                    <div class="jaw-divider"></div>
+
+                    <!-- فک پایین -->
+                    <div class="jaw-row">
+                        <span class="jaw-title">فک پایین (مندیبل): دندان‌های ۴۸ تا ۴۱ (سمت راست) و ۳۱ تا ۳۸ (سمت چپ)</span>
+                        <div class="teeth-row" id="lowerJawTeeth"></div>
+                    </div>
+                </div>
+
+                <!-- پنل مشخصات تفصیلی دندان انتخاب‌شده -->
+                <div class="selected-tooth-details" id="selectedToothBox" style="display: none;">
+                    <div class="tooth-detail-badge" id="toothDetailBadge">#00</div>
+                    <div class="tooth-detail-info">
+                        <div class="tooth-title-row">
+                            <div>
+                                <h4 id="toothDetailTitle">نام دندان</h4>
+                                <span class="tooth-type-badge" id="toothDetailType" style="font-size:0.78rem;color:#64748b;"></span>
+                            </div>
+                            <span class="tooth-quadrant-badge" id="toothDetailQuadrant">فک بالا</span>
+                            <span class="tooth-status-pill" id="toothDetailStatus">سالم</span>
+                        </div>
+                        <p class="tooth-location-text">
+                            <strong>کجای دندان ایراد دارد؟</strong> <span id="toothDetailLocation">تاج و سطح جونده</span>
+                        </p>
+                        <p class="tooth-desc-text" id="toothDetailDesc">شرح وضعیت دندان</p>
+                        <p class="tooth-treatment-text">
+                            <strong>اقدام پیشنهادی دندانپزشکی:</strong> <span id="toothDetailTreatment">ترمیم کامپوزیت</span>
+                        </p>
+                    </div>
+                    <div class="tooth-detail-meta" id="toothDetailMeta">
+                        <div class="tooth-conf-box">
+                            <span class="conf-title">احتمال درستی</span>
+                            <span class="conf-val" id="toothDetailConf">95%</span>
+                        </div>
+                        <div class="tooth-err-box">
+                            <span class="err-title">احتمال خطا</span>
+                            <span class="err-val" id="toothDetailErr">5%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- راهنمای استاندارد نام‌گذاری و شماره‌گذاری دندان‌ها (FDI System) -->
+                <div class="fdi-guide-box">
+                    <div class="fdi-guide-header">
+                        <span class="fdi-guide-icon">📖</span>
+                        <div>
+                            <strong>راهنمای سیستم نام‌گذاری و شماره‌گذاری دندان‌ها (استاندارد جهانی FDI):</strong>
+                            <p class="fdi-guide-subtitle">در علم دندانپزشکی، به‌جای شماره‌گذاری تصادفی، از سیستم استاندارد دو رقمی فدراسیون بین‌المللی دندانپزشکی (FDI World Dental Federation) استفاده می‌شود:</p>
+                        </div>
+                    </div>
+                    <div class="fdi-grid-info">
+                        <div class="fdi-grid-col">
+                            <h5>🔢 رقم اول: موقعیت ربع فک (Quadrant)</h5>
+                            <ul>
+                                <li><strong>ربع ۱ (۱۰+):</strong> فک بالا - سمت راست بیمار (دندان‌های ۱۱ تا ۱۸)</li>
+                                <li><strong>ربع ۲ (۲۰+):</strong> فک بالا - سمت چپ بیمار (دندان‌های ۲۱ تا ۲۸)</li>
+                                <li><strong>ربع ۳ (۳۰+):</strong> فک پایین - سمت چپ بیمار (دندان‌های ۳۱ تا ۳۸)</li>
+                                <li><strong>ربع ۴ (۴۰+):</strong> فک پایین - سمت راست بیمار (دندان‌های ۴۱ تا ۴۸)</li>
+                            </ul>
+                        </div>
+                        <div class="fdi-grid-col">
+                            <h5>🦷 رقم دوم: نوع و موقعیت دندان (از جلو به عقب)</h5>
+                            <ul>
+                                <li><strong>۱ و ۲:</strong> دندان‌های پیشین (ثنایای مرکزی و کناری) — تک‌ریشه</li>
+                                <li><strong>۳:</strong> دندان نیش (کانین) — بلندترین تک‌ریشه قوس فکی</li>
+                                <li><strong>۴ و ۵:</strong> دندان‌های پره‌مولر اول و دوم (آسیای کوچک) — دو ریشه</li>
+                                <li><strong>۶ و ۷ و ۸:</strong> دندان‌های آسیای بزرگ (مولار اول، دوم و عقل) — ۲ الی ۳ ریشه</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- جدول تفکیکی جامع مشخصات عوارض به فارسی روان -->
+            <div class="card findings-table-card">
+                <div class="card-header">
+                    <div>
+                        <h3>جدول تفکیکی عوارض، درصد احتمال درستی و خطا، و محل دقیق عارضه</h3>
+                        <p class="card-desc">تفکیک دقیق موضع آسیب در مینا، عاج، پالپ عصب، ریشه و استخوان فک به زبان فارسی</p>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="findings-table">
+                        <thead>
+                            <tr>
+                                <th>شماره و نام دندان</th>
+                                <th>نوع بیماری / عارضه</th>
+                                <th>کجای دندان ایراد دارد؟ (محل دقیق آناتومیک)</th>
+                                <th>درصد احتمال درستی</th>
+                                <th>درصد احتمال خطا</th>
+                                <th>طرح درمان پیشنهادی</th>
+                            </tr>
+                        </thead>
+                        <tbody id="findingsTableBody">
+                            <!-- به صورت خودکار پر می‌شود -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- گالری برش‌های بزرگنمایی‌شده دندان‌ها -->
+            <div class="card crops-card" id="cropsCard">
+                <div class="card-header">
+                    <div>
+                        <h3>برش‌های زوم‌شده دندان‌های دارای عارضه (Zoomed Findings)</h3>
+                        <p class="card-desc">بزرگنمایی دقیق از هر دندان آسیب‌دیده برای بررسی بافت مینا و ریشه</p>
+                    </div>
+                </div>
+                <div class="crops-gallery" id="cropsGallery">
+                    <!-- به صورت خودکار پر می‌شود -->
+                </div>
+            </div>
+
+            <!-- کارنامه بالینی و گزارش قابل چاپ رسمی -->
+            <div class="card report-card">
+                <div class="card-header">
+                    <div>
+                        <h3>کارنامه بالینی و گزارش رسمی رادیولوژی دندان</h3>
+                        <p class="card-desc">خلاصه مستند وضعیت دندان‌های بیمار با امکان چاپ مستقیم یا ذخیره به صورت PDF</p>
+                    </div>
+                    <button class="btn btn-secondary" onclick="window.print()">🖨️ چاپ / ذخیره گزارش رسمی PDF</button>
+                </div>
+                <div class="report-content" id="reportContent">
+                    <!-- توسط جاوااسکریپت پر می‌شود -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>DentalAI Studio Pro • سامانه هوشمند تحلیل رادیوگرافی پانورامیک دندان (OPG) بر اساس استاندارد جهانی FDI</p>
+    </footer>
+
+    <script src="/app.js"></script>
+</body>
+</html>

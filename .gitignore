@@ -1,0 +1,54 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDE & editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Antigravity agent & cache metadata
+.antigravity/
+
+# Ultralytics & model training artifacts
+runs/
+*.pth
+# Note: dental_yolov8_best.pt is tracked as the main ready-to-use clinical model weights
+
+# Datasets and archives (prevent bloating git repo)
+opg_extended_pathology/
+datasets/
+data/
+*.zip
+*.tar.gz
+
+# Flutter build directory (web UI is served directly via /web)
+flutter_web/
+
+# Test / debug generated outputs
+test_en_output.jpg
+
+# Private user radiography samples & clinical patient scans
+sample_clinical_opg.png
+sample_bitewing.jpg
+sample_bitewing_left.jpg
+sample_panoramic_crop.jpg
+dataset_overview.jpg
+*.png
+*.jpg
+*.jpeg
+*.dcm
+
+# Operating system files
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.log
